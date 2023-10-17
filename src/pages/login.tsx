@@ -1,7 +1,11 @@
 import type { NextPage } from "next"
 
+import Image from 'next/image';
+import Link from 'next/link';
 import { Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
+
+import users from '../../data/users.json'
 
 type FieldErrorTypes = {
   error: string | undefined,
@@ -77,7 +81,7 @@ const LoginPage: NextPage = () => {
               <button
                 type='submit'
                 disabled={(values.username.length === 0 || values.password.length === 0) || isSubmitting}
-                  className={`text-white px-4 py-6 rounded w-full ${(values.username.length === 0 || values.password.length === 0) ? 'bg-gray-500 disabled:opacity-25 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}>
+                className={`text-white px-4 py-6 rounded w-full ${(values.username.length === 0 || values.password.length === 0) ? 'bg-gray-500 disabled:opacity-25 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}>
                 Login
               </button>
             </div>
@@ -95,15 +99,44 @@ const LoginPage: NextPage = () => {
   return (
 
     <div className="w-full h-screen flex">
+      <Link href='/'>
+        <a className='absolute top-0 left-0 mt-4 ml-4 cursor-pointer'>
+          <Image
+            alt='Revive Logo'
+            src='/revive.png'
+            width={200}
+            height={50}
+          />
+        </a>
+      </Link>
       <div className='w-full md:w-3/5 flex justify-center items-center p-4 relative'>
         <Formik
           enableReinitialize
           initialValues={initialValues}
           validationSchema={formSchema}
-          onSubmit={(values, actions) => {
-            console.debug('file: login.tsx:89 ༻༺ values:', values);
+          onSubmit={async (values, actions) => {
             actions.setSubmitting(false);
-            // onSubmit(payload, actions.setSubmitting);
+            try {
+              const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', },
+                body: JSON.stringify(values),
+              });
+              if (response.ok) {
+                if (response.status === 200) {
+                  const data = await response.json();
+                  console.debug('file: login.tsx:128 ༻༺ onSubmit={ ༻༺ data:', data);
+                  localStorage.setItem('authorized', JSON.stringify(data.authorized));
+                }
+              } else {
+                // Trigger by changing api endpoint (filename)
+                console.log('ERROR')
+              }
+            } catch (error) {
+              console.error(error);
+            } finally {
+              actions.setSubmitting(false);
+            }
           }}>
           {renderForm}
         </Formik>
