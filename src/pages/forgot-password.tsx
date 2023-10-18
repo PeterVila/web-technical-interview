@@ -1,24 +1,10 @@
-import React, { useEffect } from 'react';
 import type { NextPage } from "next"
-import { useRouter } from 'next/router';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import ForgotPasswordForm from '../components/forms/ForgotPasswordForm';
 
-import LoginForm from '../components/forms/LoginForm';
-
-const LoginPage: NextPage = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const authenticated = localStorage.getItem('authorized');
-
-    if (authenticated) {
-      const parsedAuthorization = JSON.parse(authenticated);
-      router.push(`/users/${parsedAuthorization.id}`);
-    }
-  }, [router]);
-
+const ForgotPasswordPage: NextPage = () => {
   return (
     <div className="w-full min-h-screen flex">
       <Link href='/'>
@@ -31,7 +17,7 @@ const LoginPage: NextPage = () => {
           />
         </a>
       </Link>
-      <LoginForm />
+      <ForgotPasswordForm /> 
       <div
         className="w-100 md:w-2/5 bg-[url('/house.jpg')] bg-cover"
         title='House'
@@ -40,4 +26,4 @@ const LoginPage: NextPage = () => {
   )
 }
 
-export default LoginPage
+export default ForgotPasswordPage

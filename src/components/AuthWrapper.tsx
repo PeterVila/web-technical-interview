@@ -1,27 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/router';
 
-const AuthWrapper = ({ children }) => {
+interface AuthWrapperProps {
+  children: ReactNode;
+}
+
+const AuthWrapper = ({ children }:AuthWrapperProps) => {
   const router = useRouter();
+  const { userId } = router.query as { userId: string };
 
   useEffect(() => {
-    // Check if the route is not the default '/'
-    if (router.pathname !== '/') {
-      const authorized = localStorage.getItem('authorized');
-
-      if (!authorized) {
+    const authorized = localStorage.getItem('authorized');
+    if (!authorized) {
+      router.push('/login');
+    } else {
+      const authenticated = JSON.parse(authorized);
+      console.log(authenticated.id, userId)
+      if (authenticated.id !== parseInt(userId)) {
         router.push('/login');
-      } else {
-        const parsedAuthorization = JSON.parse(authorized);
-        if (parsedAuthorization) {
-          router.push(`/users/${parsedAuthorization.id}`);
-        }
       }
     }
-  }, [router]);
-  
+  }, [router, userId]);
 
-  return children;
+  return <>{children}</>;
 };
 
 export default AuthWrapper;

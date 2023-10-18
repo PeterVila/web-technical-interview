@@ -4,9 +4,11 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify'
 import FieldError from '../FieldError';
 import TextInput from '../TextInput';
-
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const LoginForm = () => {
+  const router = useRouter();
   const initialValues = {
     username: 'adam.b@iloverevive.com',
     password: 'revive',
@@ -82,9 +84,11 @@ const LoginForm = () => {
               </button>
             </div>
             <div className='flex justify-end'>
-              <a className="text-blue-500 hover:text-blue-800 underline">
-                Forgot Password?
-              </a>
+              <Link href="/forgot-password">
+                <a className="underline text-sm text-blue-500 hover:text-blue-800">
+                  Forgot Password?
+                </a>
+              </Link>
             </div>
           </form>
         </div>
@@ -103,24 +107,22 @@ const LoginForm = () => {
           try {
             const response = await fetch('/api/login', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json', },
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(values),
             });
-            if (response.ok) {
-              if (response.status === 200) {
-                const data = await response.json();
-                console.debug('file: login.tsx:128 ༻༺ onSubmit={ ༻༺ data:', data);
-                localStorage.setItem('authorized', JSON.stringify(data.authorized));
-                toast.success('Log in successful!')
-              }
+          
+            if (response.ok && response.status === 200) {
+              const data = await response.json();
+              localStorage.setItem('authorized', JSON.stringify(data.authorized));
+              toast.success('Log in successful!');
+              await router.push(`/login`);
             } else {
-              // Trigger by changing api endpoint (filename)
-              console.log('ERROR')
+              console.log('ERROR');
               toast.error('Incorrect email or password.');
             }
           } catch (error) {
             console.error(error);
-            toast.error('It looks like something went wrong. Please try again.');
+            toast.error('Something went wrong. Please try again.');
           } finally {
             actions.setSubmitting(false);
           }
