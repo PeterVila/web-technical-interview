@@ -10,10 +10,16 @@ const AuthWrapper = ({ children }) => {
       const authorized = localStorage.getItem('authorized');
 
       if (!authorized) {
-        router.replace('/login');
+        router.push('/login');
+      } else {
+        const parsedAuthorization = JSON.parse(authorized);
+        if (parsedAuthorization) {
+          router.push(`/users/${parsedAuthorization.id}`);
+        }
       }
     }
   }, [router]);
+  
 
   return children;
 };
