@@ -1,11 +1,12 @@
+import React, { useEffect, useState } from 'react';
 import type { NextPage } from "next"
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
-
-import users from '../../data/users.json'
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify'
 
 type FieldErrorTypes = {
   error: string | undefined,
@@ -27,9 +28,13 @@ const FieldError = ({ error, touched, disabled = false }: FieldErrorTypes) => {
 };
 
 const LoginPage: NextPage = () => {
+  const router = useRouter();
+
+  const [test, setTest] = useState(false);
+
   const initialValues = {
-    username: '',
-    password: '',
+    username: 'adam.b@iloverevive.com',
+    password: 'revive',
   };
 
   const formSchema = Yup.object().shape({
@@ -41,6 +46,18 @@ const LoginPage: NextPage = () => {
     username: string;
     password: string;
   }>
+
+  // Check if the user is already logged in when the component mounts and when the page changes since we are doing router.push()
+  useEffect(() => {
+    const authorized = localStorage.getItem('authorized');
+    if (authorized) {
+      const parsedAuthorization = JSON.parse(authorized);
+      if (parsedAuthorization) {
+        router.push(`/users/${parsedAuthorization.id}`);
+      }
+    }
+  }, [router, test]);
+
 
   const renderForm = ({ handleChange, handleBlur, handleSubmit, isSubmitting, errors, values, touched }: FormProps) => (
     <div className="w-full md:w-4/5 p-10 max-w-screen-lg">
@@ -97,8 +114,7 @@ const LoginPage: NextPage = () => {
   );
 
   return (
-
-    <div className="w-full h-screen flex">
+    <div className="w-full min-h-screen flex">
       <Link href='/'>
         <a className='absolute top-0 left-0 mt-4 ml-4 cursor-pointer'>
           <Image
@@ -127,13 +143,17 @@ const LoginPage: NextPage = () => {
                   const data = await response.json();
                   console.debug('file: login.tsx:128 ༻༺ onSubmit={ ༻༺ data:', data);
                   localStorage.setItem('authorized', JSON.stringify(data.authorized));
+                  toast.success('Log in successful!')
+                  setTest(true);
                 }
               } else {
                 // Trigger by changing api endpoint (filename)
                 console.log('ERROR')
+                toast.error('Incorrect email or password.');
               }
             } catch (error) {
               console.error(error);
+              toast.error('It looks like something went wrong. Please try again.');
             } finally {
               actions.setSubmitting(false);
             }
