@@ -31,16 +31,6 @@ const LoginForm = () => {
         <div className="bg-white">
           <form onSubmit={handleSubmit} noValidate autoComplete='off' encType='multipart/form-data'>
             <div className='mb-6 bg-white'>
-              {/* <input
-                className='shadow appearance-none border rounded w-full py-6 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                type='text'
-                aria-label='username'
-                name='username'
-                placeholder="Enter email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.username}
-              /> */}
               <TextInput
                 name='username'
                 ariaLabel='username'
@@ -53,16 +43,6 @@ const LoginForm = () => {
             </div>
 
             <div className='mb-6 bg-white'>
-              {/* <input
-                className='shadow appearance-none border rounded w-full py-6 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                type='password'
-                aria-label='password'
-                name='password'
-                placeholder="Enter password"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.password}
-              /> */}
               <TextInput
                 type='password'
                 name='password'
@@ -110,7 +90,7 @@ const LoginForm = () => {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(values),
             });
-          
+
             if (response.ok && response.status === 200) {
               const data = await response.json();
               localStorage.setItem('authorized', JSON.stringify(data.authorized));

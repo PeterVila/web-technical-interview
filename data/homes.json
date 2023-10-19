@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "address": "123 fake st",
-    "fullAddress": "123 fake st. Irvine, CA 92656",
+    "address": "123 Fake St.",
+    "fullAddress": "123 Fake St. Irvine, CA 92656",
     "city": "Irvine",
     "state": "CA",
     "zipCode": 92656,

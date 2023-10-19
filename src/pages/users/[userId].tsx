@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import AuthWrapper from '../../components/AuthWrapper';
 import { useEffect, useState } from 'react';
+import Card from '../../components/Card';
+import homes from '../../../data/homes.json';
 
-// TODO : Treat this page as the Cards page
-// TODO : Probably isn't best practice to use userId in dynamic urls. But for demonstration purposes.
 const UserPage = () => {
   const router = useRouter();
   const { userId } = router.query as { userId: string };
@@ -34,6 +34,23 @@ const UserPage = () => {
     <AuthWrapper>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <h1>User Profile for User ID: {userId}</h1>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-6'>
+          {/* Map through the data/homes.json file. Array of 4. */}
+          {homes.map((home) => (
+            <Card
+              key={home.id}
+              address={home.address}
+              city={home.city}
+              state={home.state}
+              zipCode={home.zipCode}
+              bedrooms={home.bedrooms}
+              yearBuilt={home.yearBuilt}
+              bathrooms={home.bathrooms}
+              sqft={home.sqft}
+              imageSrc='/house.jpg'
+            />
+          ))}
+        </div>
         <div className="flex justify-end mb-3">
           <button
             type="button"
@@ -41,7 +58,7 @@ const UserPage = () => {
               localStorage.removeItem('authorized');
               router.push('/login');
             }}
-            className="text-white px-4 py-4 rounded bg-blue-500 hover:bg-blue-600"
+            className="text-white px-6 py-4 rounded bg-blue-500 hover:bg-blue-600"
             data-cy="login-button"
           >
             Logout
