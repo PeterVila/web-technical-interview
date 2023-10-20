@@ -4,10 +4,10 @@ import Image from 'next/image'
 import { faBed, faUsers, faToilet, faHome, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import TextInput from './TextInput';
 import Modal from './Modal';
+import InquiryForm from './forms/InquiryForm';
 
-interface CardProps {
+export interface CardProps {
   address: string;
   city: string;
   state: string;
@@ -17,6 +17,7 @@ interface CardProps {
   yearBuilt: number;
   bathrooms: number;
   sqft: number;
+  setClose?: () => void;
 }
 const Card = ({
   address,
@@ -93,20 +94,18 @@ const Card = ({
         </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} >
-        <div className="m-4">
-          <h1 className="text-2xl font-bold mb-2">Property Listing Inquiry</h1>
-          <p className="text-gray-700">Please fill the form below to know more about the property</p>
-        </div>
-        <div className='mx-4'>
-          <TextInput
-            name='username'
-            ariaLabel='username'
-            placeHolder='dasdad'
-            value={'dasd'}
-            onChange={() => console.log('asd')}
-            onBlur={() => console.log('asd')}
-          />
-        </div>
+        <InquiryForm
+            address={address}
+            city={city}
+            state={state}
+            zipCode={zipCode}
+            bedrooms={bedrooms}
+            yearBuilt={yearBuilt}
+            bathrooms={bathrooms}
+            sqft={sqft}
+            imageSrc={imageSrc}
+            setClose={closeModal}
+        />
       </Modal>
     </div>
   );

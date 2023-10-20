@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import React from 'react';
-import AuthWrapper from '../../components/AuthWrapper';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
+import AuthWrapper from '../../components/AuthWrapper';
 import Card from '../../components/Card';
 import homes from '../../../data/homes.json';
 
@@ -26,14 +26,13 @@ const UserPage = () => {
         console.error('Something went wrong. Please try again.', error);
       }
     };
-
     fetchData();
   }, []);
 
   return (
     <AuthWrapper>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        <h1>User Profile for User ID: {userId}</h1>
+        <h1 className='my-4'>User Profile for User ID: {userId}</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-6'>
           {/* Map through the data/homes.json file. Array of 4. */}
           {homes.map((home) => (
