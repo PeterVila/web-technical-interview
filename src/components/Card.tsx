@@ -60,7 +60,7 @@ const Card = ({
         <div className='flex justify-between mb-2'>
           <div>
             <h1 className='text-custom-900 text-2xl font-extrabold'>{address}</h1>
-            <p className='text-custom-500 text-lg'>
+            <p className='text-custom-700 text-lg'>
               {city}, {state} {zipCode}
             </p>
           </div>
@@ -74,7 +74,7 @@ const Card = ({
             </button>
           </div>
         </div>
-        <div className='flex flex-wrap justify-between text-custom-500 text-xs'>
+        <div className='flex flex-wrap justify-between text-custom-600 text-xs'>
           <div className='flex items-center justify-center'>
             <FontAwesomeIcon icon={faBed} aria-label='Bedrooms' />
             <span className='ml-2'>{bedrooms}</span>

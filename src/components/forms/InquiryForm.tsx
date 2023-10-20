@@ -42,7 +42,7 @@ const InquiryForm = ({
 
   const renderForm = ({ handleChange, handleBlur, handleSubmit, isSubmitting, errors, values, touched }: FormProps) => (
     <div className="m-4">
-      <h1 className="text-2xl font-bold mb-2">Property Listing Inquiry</h1>
+      <h1 className="text-2xl font-bold text-custom-900 mb-2">Property Listing Inquiry</h1>
       <p className="text-gray-700 mb-4">Please fill the form below to know more about the property - {address}</p>
       <div className='flex justify-center'>
         {imageSrc &&
@@ -55,7 +55,7 @@ const InquiryForm = ({
           />
         }
       </div>
-      <div className="grid grid-cols-2 grid-rows-3 gap-4 my-6 mx-6">
+      <div className="grid grid-cols-2 grid-rows-3 gap-4 my-6 mx-6 text-gray-600">
         <div>Zip Code: {zipCode}</div>
         <div>Bedrooms: {bedrooms}</div>
         <div className="row-start-2">Bathrooms: {bathrooms}</div>
@@ -118,12 +118,11 @@ const InquiryForm = ({
               Send Message
             </button>
           </div>
-
           <div className='mb-3'>
             <button
               type='button'
-              onClick={() => setClose()}
-              className={`px-4 py-4 rounded w-full`}>
+              onClick={setClose}
+              className={`px-4 py-4 rounded w-full text-blue-600`}>
               Close
             </button>
           </div>
