@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import AuthWrapper from '../../components/AuthWrapper';
 import Card from '../../components/Card';
@@ -31,6 +32,11 @@ const UserPage = () => {
 
   return (
     <AuthWrapper>
+      <Head>
+        <title>Home</title>
+        <meta name='home' content='Home' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <h1 className='my-4'>User Profile for User ID: {userId}</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-6'>
@@ -46,7 +52,7 @@ const UserPage = () => {
               yearBuilt={home.yearBuilt}
               bathrooms={home.bathrooms}
               sqft={home.sqft}
-              imageSrc='/house.jpg'
+              imageSrc={home.imgSrc}
             />
           ))}
         </div>

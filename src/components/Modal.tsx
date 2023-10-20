@@ -30,10 +30,8 @@ const Modal = ({ onClose, isOpen, children }: ModalProps) => {
   if (!isOpen) return null;
 
   const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    // Handler only applies to keyboard navigation through tabbing
-    if (e.key !== 'Tab') return
-
-    // Query of possible focusable elements within my modal
+    if (e.key !== 'Tab') return;
+    
     const focusableModalElements = modalRef.current?.querySelectorAll(
       'a[href], button:not([disabled]), textarea, input, select'
     )
@@ -53,17 +51,15 @@ const Modal = ({ onClose, isOpen, children }: ModalProps) => {
         e.preventDefault()
       }
     }
-
   }
-
 
   return (
     <div className="fixed inset-0 z-50 flex h-fit justify-center mt-6">
       <div className="fixed inset-0 bg-black opacity-50"></div>
       <div className="bg-white p-4 rounded-lg w-full max-w-lg relative" ref={modalRef} onKeyDown={(e) => keyDownHandler(e)}>
         <div className="absolute top-0 right-0 p-2">
-          <button onClick={onClose} className="text-gray-600 hover:text-gray-800 p-3">
-            <FontAwesomeIcon icon={faX} aria-label='Bedrooms' />
+          <button aria-label='Close Icon' onClick={onClose} className="text-gray-600 hover:text-gray-800 p-3">
+            <FontAwesomeIcon icon={faX} aria-label='Close' />
           </button>
         </div>
         {children}

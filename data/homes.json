@@ -9,7 +9,8 @@
     "bedrooms": 4,
     "bathrooms": 2.5,
     "yearBuilt": 2000,
-    "sqft": 2343
+    "sqft": 2343,
+    "imgSrc": "/house1.jpg"
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "bedrooms": 5,
     "bathrooms": 3.5,
     "yearBuilt": 2001,
-    "sqft": 3200
+    "sqft": 3200,
+    "imgSrc": "/house2.jpg"
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "bedrooms": 4,
     "bathrooms": 1,
     "yearBuilt": 2006,
-    "sqft": 2800
+    "sqft": 2800,
+    "imgSrc": "/house3.jpg"
   },
   {
     "id": 3,
@@ -45,6 +48,7 @@
     "bedrooms": 2,
     "bathrooms": 2.5,
     "yearBuilt": 2000,
-    "sqft": 1200
+    "sqft": 1200,
+    "imgSrc": "/house4.jpg"
   }
 ]

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import type { NextPage } from "next"
 import { useRouter } from 'next/router';
 
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -21,6 +22,11 @@ const LoginPage: NextPage = () => {
 
   return (
     <div className="w-full min-h-screen flex">
+      <Head>
+        <title>Login</title>
+        <meta name='login' content='Login page' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
       <Link href='/'>
         <a className='absolute top-0 left-0 mt-4 ml-4 cursor-pointer'>
           <Image
@@ -33,7 +39,7 @@ const LoginPage: NextPage = () => {
       </Link>
       <LoginForm />
       <div
-        className="w-100 md:w-2/5 bg-[url('/house.jpg')] bg-cover"
+        className="w-100 md:w-2/5 bg-[url('/house1.jpg')] bg-cover"
         title='House'
       />
     </div>

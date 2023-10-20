@@ -27,7 +27,7 @@ const InquiryForm = ({
 
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
   const formSchema = Yup.object().shape({
-    name: Yup.string().trim().max(255).email('Please provide a valid email').required('This field is required'),
+    name: Yup.string().trim().max(255).required(),
     phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('This field is required'),
     email: Yup.string().trim().email('Please provide a valid email').max(255).required('This field is required'),
     message: Yup.string().trim().max(255),
@@ -140,17 +140,17 @@ const InquiryForm = ({
         onSubmit={async (values, actions) => {
           actions.setSubmitting(false);
           try {
-            const response = await fetch('/api/forgot-password', {
+            const response = await fetch('/api/inquiry', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(values),
             });
 
             if (response.ok && response.status === 200) {
-              toast.success('Password reset sent!');
+              toast.success('Inquiry Sent!');
             } else {
               // If the User is not found
-              toast.error('Something went wrong. Please try again.');
+              toast.error('This route doesnt exist.');
             }
           } catch (error) {
             console.error(error);
