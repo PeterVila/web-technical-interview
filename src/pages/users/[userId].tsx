@@ -44,6 +44,7 @@ const UserPage = () => {
           {homes.map((home) => (
             <Card
               key={home.id}
+              id={home.id}
               address={home.address}
               city={home.city}
               state={home.state}

@@ -58,6 +58,7 @@ const LoginForm = () => {
             <div className='mb-3'>
               <button
                 type='submit'
+                data-cy='login-button'
                 disabled={(values.username.length === 0 || values.password.length === 0) || isSubmitting}
                 className={`text-white px-4 py-6 rounded w-full ${(values.username.length === 0 || values.password.length === 0) ? 'bg-gray-500 disabled:opacity-25 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}>
                 Login

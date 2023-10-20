@@ -18,6 +18,7 @@ export interface CardProps {
   bathrooms: number;
   sqft: number;
   setClose?: () => void;
+  id: number;
 }
 const Card = ({
   address,
@@ -28,7 +29,8 @@ const Card = ({
   yearBuilt,
   bathrooms,
   sqft,
-  imageSrc
+  imageSrc,
+  id,
 }: CardProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -47,7 +49,7 @@ const Card = ({
       <div className='absolute inset-0 transition duration-300 hover:scale-110 mb-10'>
         {imageSrc &&
           <Image
-            alt='Mountains'
+            alt={`house-${id}`}
             src={imageSrc}
             layout='fill'
             objectFit='cover'
@@ -67,6 +69,7 @@ const Card = ({
           <div>
             <button
               aria-label='trigger-card'
+              data-cy='trigger-card-modal'
               onClick={openModal}>
               <div className={`flex items-center justify-center bg-green-400 hover:bg-green-500 text-white text-xs rounded h-8 w-8`}>
                 <FontAwesomeIcon icon={faChevronRight} aria-label='Right arrow' />
