@@ -1,5 +1,4 @@
-// src/Card.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image'
 import { faBed, faUsers, faToilet, faHome, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,7 +17,7 @@ export interface CardProps {
   bathrooms: number;
   sqft: number;
   setClose?: () => void;
-  id: number;
+  id?: number;
 }
 const Card = ({
   address,
@@ -44,8 +43,6 @@ const Card = ({
 
   return (
     <div className='relative rounded-2xl overflow-hidden shadow-lg' style={{ height: '500px' }}>
-      {/* Full-width image */}
-      {/* https://birdeatsbug.com/blog/creating-hover-effects-with-tailwind-css */}
       <div className='absolute inset-0 transition duration-300 hover:scale-110 mb-10'>
         {imageSrc &&
           <Image
@@ -56,8 +53,6 @@ const Card = ({
           />
         }
       </div>
-
-      {/* Card content */}
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-white rounded-xl transform">
         <div className='flex justify-between mb-2'>
           <div>
@@ -98,16 +93,16 @@ const Card = ({
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} >
         <InquiryForm
-            address={address}
-            city={city}
-            state={state}
-            zipCode={zipCode}
-            bedrooms={bedrooms}
-            yearBuilt={yearBuilt}
-            bathrooms={bathrooms}
-            sqft={sqft}
-            imageSrc={imageSrc}
-            setClose={closeModal}
+          address={address}
+          city={city}
+          state={state}
+          zipCode={zipCode}
+          bedrooms={bedrooms}
+          yearBuilt={yearBuilt}
+          bathrooms={bathrooms}
+          sqft={sqft}
+          imageSrc={imageSrc}
+          setClose={closeModal}
         />
       </Modal>
     </div>

@@ -5,7 +5,7 @@ interface AuthWrapperProps {
   children: ReactNode;
 }
 
-const AuthWrapper = ({ children }:AuthWrapperProps) => {
+const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const router = useRouter();
   const { userId } = router.query as { userId: string };
 
@@ -15,7 +15,6 @@ const AuthWrapper = ({ children }:AuthWrapperProps) => {
       router.push('/login');
     } else {
       const authenticated = JSON.parse(authorized);
-      console.log(authenticated.id, userId)
       if (authenticated.id !== parseInt(userId)) {
         router.push('/login');
       }

@@ -4,14 +4,24 @@ import Head from 'next/head';
 
 import AuthWrapper from '../../components/AuthWrapper';
 import Card from '../../components/Card';
-import homes from '../../../data/homes.json';
+
+interface Home {
+  id: number;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: number;
+  bedrooms: number;
+  yearBuilt: number;
+  bathrooms: number;
+  sqft: number;
+  imgSrc: string;
+}
 
 const UserPage = () => {
   const router = useRouter();
   const { userId } = router.query as { userId: string };
-  const [data, setData] = useState([]);
-
-  console.debug('file: [userId].tsx:13 ༻༺ UserPage ༻༺ data:', data);
+  const [data, setData] = useState<Home[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,8 +50,7 @@ const UserPage = () => {
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <h1 className='my-4'>User Profile for User ID: {userId}</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-6'>
-          {/* Map through the data/homes.json file. Array of 4. */}
-          {homes.map((home) => (
+          {data.map((home) => (
             <Card
               key={home.id}
               id={home.id}

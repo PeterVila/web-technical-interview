@@ -1,11 +1,13 @@
 
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+
 import { Formik, FormikProps } from 'formik';
-import * as Yup from 'yup';
 import { toast } from 'react-toastify'
+import * as Yup from 'yup';
+
 import FieldError from '../FieldError';
 import TextInput from '../TextInput';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -85,20 +87,19 @@ const LoginForm = () => {
         validationSchema={formSchema}
         onSubmit={async (values, actions) => {
           actions.setSubmitting(false);
+
           try {
             const response = await fetch('/api/login', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(values),
             });
-
             if (response.ok && response.status === 200) {
               const data = await response.json();
               localStorage.setItem('authorized', JSON.stringify(data.authorized));
               toast.success('Log in successful!');
               await router.push(`/login`);
             } else {
-              console.log('ERROR');
               toast.error('Incorrect email or password.');
             }
           } catch (error) {
@@ -107,6 +108,7 @@ const LoginForm = () => {
           } finally {
             actions.setSubmitting(false);
           }
+
         }}>
         {renderForm}
       </Formik>

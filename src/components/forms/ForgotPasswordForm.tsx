@@ -1,10 +1,12 @@
 
+import Link from 'next/link';
+
 import { Formik, FormikProps } from 'formik';
-import * as Yup from 'yup';
 import { toast } from 'react-toastify'
+import * as Yup from 'yup';
+
 import FieldError from '../FieldError';
 import TextInput from '../TextInput';
-import Link from 'next/link';
 
 const ForgotPasswordForm = () => {
   const initialValues = {
@@ -12,7 +14,7 @@ const ForgotPasswordForm = () => {
   };
 
   const formSchema = Yup.object().shape({
-    username: Yup.string().trim().max(255).email('Please provide a valid email'), // Not required
+    username: Yup.string().trim().max(255).email('Please provide a valid email'),
   });
 
   type FormProps = FormikProps<{
@@ -73,7 +75,7 @@ const ForgotPasswordForm = () => {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(values),
             });
-          
+
             if (response.ok && response.status === 200) {
               toast.success('Password reset sent!');
             } else {

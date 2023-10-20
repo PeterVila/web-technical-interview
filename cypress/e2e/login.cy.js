@@ -15,32 +15,17 @@ describe('Exercise 2 - Login', () => {
 
   it('Login Flow', () => {
     cy.wait(350);
-
     cy.get('[name="username"]').clear().type('adam.b@iloverevive.com');
     cy.get('[name="password"]').clear().type('revive');
     cy.get('[data-cy="login-button"]').click();
-
     cy.contains('User Profile for User ID: 1').should('be.visible');
   });
 });
 
 describe('Exercise 1 - Cards', () => {
-  // before(() => {
-  //   cy.window().then((win) => {
-  //     // Set LocalStorage values ()
-  //     win.localStorage.setItem('authorized', JSON.stringify({
-  //       "id": 1,
-  //       "firstname": "Adam",
-  //       "lastname": "Bonzai",
-  //       "email": "adam.b@iloverevive.com",
-  //       "password": "revive"
-  //     }));
-  //   });
-  // });
-
   beforeEach(() => {
     cy.window().then((win) => {
-      // Set LocalStorage values ()
+      // Set LocalStorage values
       win.localStorage.setItem('authorized', JSON.stringify({
         "id": 1,
         "firstname": "Adam",

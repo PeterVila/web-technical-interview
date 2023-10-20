@@ -1,6 +1,3 @@
-// src/Icon.tsx
-import React from 'react';
-
 interface TextInputProps {
   name: string;
   type?: 'text' | 'password';

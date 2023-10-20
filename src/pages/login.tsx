@@ -13,7 +13,6 @@ const LoginPage: NextPage = () => {
 
   useEffect(() => {
     const authenticated = localStorage.getItem('authorized');
-
     if (authenticated) {
       const parsedAuthorization = JSON.parse(authenticated);
       router.push(`/users/${parsedAuthorization.id}`);

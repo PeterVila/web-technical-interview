@@ -39,13 +39,12 @@ const Modal = ({ onClose, isOpen, children }: ModalProps) => {
     if (focusableModalElements) {
       const firstElement = focusableModalElements[0]
       const lastElement = focusableModalElements[focusableModalElements.length - 1]
-      // if going forward by pressing tab and lastElement is active shift focus to first focusable element 
+
+      // Tab logic to reset back and forth
       if (!e.shiftKey && document.activeElement === lastElement) {
         (firstElement as HTMLElement).focus()
         return e.preventDefault()
       }
-  
-      // if going backward by pressing tab and firstElement is active shift focus to last focusable element 
       if (e.shiftKey && document.activeElement === firstElement) {
         (lastElement as HTMLElement).focus();
         e.preventDefault()
